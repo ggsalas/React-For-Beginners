@@ -1,8 +1,26 @@
 import React from 'react'
 import { render } from 'react-dom'
-//import StorePicker from './components/StorePicker.js'
+import { BrowserRouter, Match, Miss } from 'react-router'
+
+// Components
+import StorePicker from './components/StorePicker.js'
 import './css/style.css'
 import App from './components/App'
+import NotFound from './components/NotFound'
 
-render(<App />, document.querySelector('#main'))
+// Router
+const Root = () => {
+  return (
+    <BrowserRouter>
+      <div>
+        <Match exactly pattern="/" component={StorePicker} />
+        <Match pattern="/store/:storeId" component={App} />
+        <Miss component={NotFound} />
+      </div>
+    </BrowserRouter>
+  )
+}
+
+render(<Root />, document.querySelector('#main'))
+
 
