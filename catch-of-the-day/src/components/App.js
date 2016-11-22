@@ -24,19 +24,38 @@ class App extends React.Component {
     this.addToOrder = this.addToOrder.bind(this)
   }
 
-  // Life Cicle of React Components
+  // Life Cicle of React Methods
+  // Sincroniza con la base de datos
   componentWillMount(){
+    // esto se ejecuta antes de que se renderice
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
       {
         context: this,
         state: 'fishes'
       }
     )
+
+    // chequear si hay localStorage para order    
+    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`)
+    // actualizar el estado de order
+    if(localStorageRef){
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      })
+    }
   }
   
-  componentUnmount(){
+  // no se de que la va
+  componentWillUnmount(){
     base.removeBinding(this.ref)
   }
+
+  // Guarda el estado de order
+  componentWillUpdate(nextProps, nextState){
+    localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order))
+  }
+
+
 
   addFish(fish) {
     // Pasar el estado de fishes a una variable "fishes"
@@ -80,7 +99,11 @@ class App extends React.Component {
             }
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
+        <Order 
+          fishes={this.state.fishes} 
+          order={this.state.order} 
+          params={this.props.params}
+        />
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     )
