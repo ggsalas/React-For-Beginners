@@ -15,13 +15,6 @@ class App extends React.Component {
       fishes: {},
       order: {}
     }
-
-    // llamar al método addFish
-    this.addFish = this.addFish.bind(this)
-    // .. y al método loadSamples
-    this.loadSamples = this.loadSamples.bind(this)
-    // .. y al método addToOrder
-    this.addToOrder = this.addToOrder.bind(this)
   }
 
   // Life Cicle of React Methods
@@ -57,7 +50,7 @@ class App extends React.Component {
 
 
 
-  addFish(fish) {
+  addFish = (fish) => {
     // Pasar el estado de fishes a una variable "fishes"
     const fishes = {...this.state.fishes}
 
@@ -69,13 +62,13 @@ class App extends React.Component {
     this.setState({fishes: fishes})
   }
 
-  loadSamples() {
+  loadSamples = () => {
     this.setState({
       fishes: sampleFishes
     })
   }
 
-  addToOrder(key) {
+  addToOrder = (key) => {
     // copiar el estado de order a la constante order
     const order = {...this.state.order}
 
