@@ -68,6 +68,12 @@ class App extends React.Component {
     this.setState({fishes})
   }
 
+  removeFish = (key) => {
+    const fishes = {...this.state.fishes}
+    fishes[key] = null //only because firebase - delete fishes[key]
+    this.setState({fishes})
+  }
+
   loadSamples = () => {
     this.setState({
       fishes: sampleFishes
@@ -83,6 +89,12 @@ class App extends React.Component {
 
     // actualizar el estado de order
     this.setState({order: order})
+  }
+
+  removeFromOrder = (key) => {
+    const order = {...this.state.order}
+    delete order[key]
+    this.setState({order})
   }
 
   render() {
@@ -102,12 +114,14 @@ class App extends React.Component {
           fishes={this.state.fishes} 
           order={this.state.order} 
           params={this.props.params}
+          removeFromOrder={this.removeFromOrder}
         />
         <Inventory 
           addFish={this.addFish} 
           loadSamples={this.loadSamples} 
           fishes={this.state.fishes}
           updateFish={this.updateFish}
+          removeFish={this.removeFish}
         />
       </div>
     )
