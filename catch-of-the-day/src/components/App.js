@@ -122,6 +122,7 @@ class App extends React.Component {
           fishes={this.state.fishes}
           updateFish={this.updateFish}
           removeFish={this.removeFish}
+          storeId={this.props.params.storeId}
         />
       </div>
     )
@@ -129,7 +130,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
 }
 
 export default App
