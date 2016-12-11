@@ -19,20 +19,21 @@ class SiteFolder extends React.Component {
   constructor(props, context){
     super(props, context)
     this.state = {
-      entries: []
+      entries: [],
+      path: this.props.initialPath
     }
   }
 
   componentDidMount(){
-    this._entriesFor({path: this.props.initialPath})
+    this._entriesFor({path: this.state.path})
     .then(entries => this.setState({entries}))
   }
 
   render() {
     return (
-      <div className="SiteFolder">
+      <div className="SiteFolder"> 
         <ul>
-          <li className="SiteFolder-item">Atrás</li>
+          <li onClick={() => this._backEntries()} className="SiteFolder-item">Atrás</li>
           {this.state.entries.map(entry => <li key={entry.id} onClick={this._handleEntryClick.bind(this, entry)} className="SiteFolder-item">{entry.name}</li>)}
         </ul>
       </div>
@@ -42,7 +43,7 @@ class SiteFolder extends React.Component {
   _handleEntryClick = (entry) => {
     if (entry['.tag'] === 'folder'){
       this._entriesFor({path: entry.path_lower})
-      .then(entries => this.setState({entries}))
+      .then(entries => this.setState({entries, path: entry.path_lower }))
     } else if (entry['.tag'] === 'file') {
       console.log('file')
     }
@@ -61,6 +62,19 @@ class SiteFolder extends React.Component {
     .then(data => data.entries)
   }
 
+  _backEntries = () => {
+    const actualPath = this.state.path
+    const backPath = actualPath.split('/').slice(0, -1).join('/')
+    console.log( actualPath )
+    console.log( backPath)
+    console.log( this.props.initialPath)
+    
+    // not back over initialPath
+    if (actualPath !== this.props.initialPath){
+      this._entriesFor({path: backPath})
+      .then(entries => this.setState({entries,  path: backPath}))
+    }
+  }
 }
 
 export default SiteFolder
