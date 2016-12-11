@@ -30,21 +30,23 @@ class SiteFolder extends React.Component {
   }
 
   render() {
+    const actualPath = this.state.path
+    const backPath = actualPath.split('/').slice(0, -1).join('/')
     return (
       <div className="SiteFolder"> 
         <ul>
-          <li onClick={() => this._backEntries()} className="SiteFolder-item">Atrás</li>
-          {this.state.entries.map(entry => <li key={entry.id} onClick={this._handleEntryClick.bind(this, entry)} className="SiteFolder-item">{entry.name}</li>)}
+          {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item">Atrás</li> : ''}
+          {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], path: entry.path_lower})} className="SiteFolder-item">{entry.name}</li>)}
         </ul>
       </div>
     )
   }
 
-  _handleEntryClick = (entry) => {
-    if (entry['.tag'] === 'folder'){
-      this._entriesFor({path: entry.path_lower})
-      .then(entries => this.setState({entries, path: entry.path_lower }))
-    } else if (entry['.tag'] === 'file') {
+  _handleEntryClick = ({tag, path} = {}) => {
+    if (tag === 'folder'){
+      this._entriesFor({path: path})
+      .then(entries => this.setState({entries, path}))
+    } else if (tag === 'file') {
       console.log('file')
     }
   }
@@ -60,20 +62,6 @@ class SiteFolder extends React.Component {
     })  
     .then(resp => resp.json())
     .then(data => data.entries)
-  }
-
-  _backEntries = () => {
-    const actualPath = this.state.path
-    const backPath = actualPath.split('/').slice(0, -1).join('/')
-    console.log( actualPath )
-    console.log( backPath)
-    console.log( this.props.initialPath)
-    
-    // not back over initialPath
-    if (actualPath !== this.props.initialPath){
-      this._entriesFor({path: backPath})
-      .then(entries => this.setState({entries,  path: backPath}))
-    }
   }
 }
 
