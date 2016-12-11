@@ -1,11 +1,14 @@
 import React from 'react'
+import AdminSites from './AdminSites'
+import AdminSiteInfo from './AdminSiteInfo'
 
 class Admin extends React.Component {
 
   render() {
     return (
       <div className="admin">
-        Hola admin
+        <AdminSites/> 
+        <AdminSiteInfo/>
       </div>
     )
   }

@@ -4,6 +4,8 @@ body
   font-size: 18px
   font-family: sans-serif
 
+
+//* HOME
 .home 
   display: flex
   align-items: center
@@ -24,9 +26,45 @@ body
   max-width: 800px
   flex-direction: column
 
+//* SITE
+.Site
+  display: flex
+  flex-direction: column
+  align-items: center
+.SiteFolder
+  max-width: 800px
+  ul
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: center
+    margin: 0
+    padding: 0
+.SiteFolder-item
+  background: yellow
+  list-style: none
+  padding: 2em
+  margin .5em
+  
 
-.site
-  background-color: green
-
+//* ADMIN
 .admin
-  background-color: red
+  display: flex
+  flex: 1
+  min-height: 100vh
+  justify-content: center
+
+.AdminSites
+  flex: 0 0 300px
+  background-color: blue
+
+.AdminSiteInfo
+  flex: 1
+  max-width: 700px
+  background-color: yellow
+
+@media screen and (max-width: 480px)
+  .admin
+    flex-direction: column
+  .AdminSites
+    flex: 0
