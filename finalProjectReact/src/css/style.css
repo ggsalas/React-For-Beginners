@@ -72,8 +72,18 @@ body {
 .SiteFolder-item {
   background: #ff0;
   list-style: none;
-  padding: 2em;
-  margin: 0.5em;
+  width: 100px;
+  padding: 20px;
+  margin: 10px;
+  font-size: 0.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+.SiteFolder-item:hover {
+  background: #808080;
 }
 .admin {
   display: -webkit-box;
