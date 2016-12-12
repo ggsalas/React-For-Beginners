@@ -55,6 +55,23 @@ body
   &:hover
     background: grey
   
+// SiteFile
+.siteFile
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+.siteFile-menu
+  background: rgba(0,0,0,.75) 
+  display: flex
+  justify-content: space-between
+  height: 40px
+  align-items: center
+  padding: 5px
+.siteFile-iframe
+  width: 100vw
+  height: calc(100vh - 60px)
 
 //* ADMIN
 .admin
@@ -77,3 +94,19 @@ body
     flex-direction: column
   .AdminSites
     flex: 0
+
+// Butons
+.button
+  color: #000
+  text-decoration: none
+  background: #eee
+  padding: .5em 1em
+  border: none
+  font-size: 16px
+  font-weight: bold
+
+.button-close
+  &::before
+    content: '\00d7'
+
+

@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import SiteFile from './SiteFile'
 
 //draft
 const DROPBOX_ACCESS_TOKEN = 'prnzgrtU38AAAAAAAAAAE-SiM917HjJloZISMGiouOPIkzaHhzShfUz92YhwGx8N'
@@ -20,7 +21,9 @@ class SiteFolder extends React.Component {
     super(props, context)
     this.state = {
       entries: [],
-      path: this.props.initialPath
+      path: this.props.initialPath,
+      fileDisplay: false,
+      fileURL: ''
     }
   }
 
@@ -34,6 +37,7 @@ class SiteFolder extends React.Component {
     const backPath = actualPath.split('/').slice(0, -1).join('/')
     return (
       <div className="SiteFolder"> 
+        {this.state.fileDisplay ? <SiteFile fileURL={this.state.fileURL} fileClose={this._fileClose}/> : null }
         <ul>
           {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item">Atrás</li> : ''}
           {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], path: entry.path_lower})} className="SiteFolder-item">{entry.name}</li>)}
@@ -42,16 +46,17 @@ class SiteFolder extends React.Component {
     )
   }
 
-  renderFile = () => {
-  }
-
   _handleEntryClick = ({tag, path} = {}) => {
     if (tag === 'folder'){
       this._entriesFor({path})
       .then(entries => this.setState({entries, path}))
     } else if (tag === 'file') {
-      console.log('file')
-      console.log(this._file({path}))
+      this._file({path})
+      .then( 
+        this.setState({
+          fileDisplay: true,
+        }) 
+      )
     }
   }
 
@@ -78,7 +83,12 @@ class SiteFolder extends React.Component {
       body: JSON.stringify({path})
     })
     .then(resp => resp.json())
-    .then(data => data.link)
+    .then(data => this.setState({fileURL: data.link}))
+  }
+  
+  _fileClose = (e) => {
+    e.preventDefault
+    this.setState({fileDisplay: false}) 
   }
 }
 
