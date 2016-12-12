@@ -105,24 +105,42 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  background: rgba(0,0,0,0.75);
 }
 .siteFile-menu {
-  background: rgba(0,0,0,0.75);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 40px;
+  height: 60px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 5px;
+  padding: 0 5px;
 }
-.siteFile-iframe {
+.siteFile-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100vw;
   height: calc(100vh - 60px);
+  overflow: hidden;
+}
+.siteFile-iframe {
+  width: 100%;
+  height: 100%;
+}
+.siteFile-image {
+  height: 100%;
+  width: auto;
 }
 .admin {
   display: -webkit-box;
