@@ -42,12 +42,16 @@ class SiteFolder extends React.Component {
     )
   }
 
+  renderFile = () => {
+  }
+
   _handleEntryClick = ({tag, path} = {}) => {
     if (tag === 'folder'){
-      this._entriesFor({path: path})
+      this._entriesFor({path})
       .then(entries => this.setState({entries, path}))
     } else if (tag === 'file') {
       console.log('file')
+      console.log(this._file({path}))
     }
   }
 
@@ -62,6 +66,19 @@ class SiteFolder extends React.Component {
     })  
     .then(resp => resp.json())
     .then(data => data.entries)
+  }
+  
+  _file ({path} = {}) {
+    return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
+      method: 'POST',
+      headers: {
+        'Authorization':'Bearer ' + DROPBOX_ACCESS_TOKEN,
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({path})
+    })
+    .then(resp => resp.json())
+    .then(data => data.link)
   }
 }
 
