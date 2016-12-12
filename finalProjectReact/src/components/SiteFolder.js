@@ -23,7 +23,8 @@ class SiteFolder extends React.Component {
       entries: [],
       path: this.props.initialPath,
       fileDisplay: false,
-      fileURL: ''
+      fileURL: '',
+      fileName: ''
     }
   }
 
@@ -37,30 +38,26 @@ class SiteFolder extends React.Component {
     const backPath = actualPath.split('/').slice(0, -1).join('/')
     return (
       <div className="SiteFolder"> 
-        {this.state.fileDisplay ? <SiteFile fileURL={this.state.fileURL} fileClose={this._fileClose}/> : null }
+        {this.state.fileDisplay ? <SiteFile fileURL={this.state.fileURL} fileClose={this._fileClose} fileName={this.state.fileName}/> : null }
         <ul>
-          {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item">Atrás</li> : ''}
-          {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], path: entry.path_lower})} className="SiteFolder-item">{entry.name}</li>)}
+          {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item SiteFolder-item-back">Atrás</li> : ''}
+          {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], path: entry.path_lower, name: entry.name})} className="SiteFolder-item">{entry.name}</li>)}
         </ul>
       </div>
     )
   }
 
-  _handleEntryClick = ({tag, path} = {}) => {
+  _handleEntryClick = ({tag, path, name} = {}) => {
     if (tag === 'folder'){
-      this._entriesFor({path})
-      .then(entries => this.setState({entries, path}))
+      this._entriesFor( {path} )
+      .then(entries => this.setState( {entries, path} ))
     } else if (tag === 'file') {
-      this._file({path})
-      .then( 
-        this.setState({
-          fileDisplay: true,
-        }) 
-      )
+      this._file( {path} )
+      .then( this.setState( {fileDisplay: true, fileName: name}) )
     }
   }
 
-  _entriesFor ({path} = {}) {
+  _entriesFor = ({path} = {}) => {
     return fetch('https://api.dropboxapi.com/2/files/list_folder',{
       method: 'POST', 
       body: JSON.stringify(Object.assign({}, BASE_ENTRIES, {path})),

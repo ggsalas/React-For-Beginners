@@ -70,7 +70,7 @@ body {
   padding: 0;
 }
 .SiteFolder-item {
-  background: #ff0;
+  background: #eee;
   list-style: none;
   width: 100px;
   padding: 20px;
@@ -83,7 +83,21 @@ body {
   word-wrap: break-word;
 }
 .SiteFolder-item:hover {
-  background: #808080;
+  background: #00f;
+}
+.SiteFolder-item-back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.SiteFolder-item-back::before {
+  content: "\00ab";
+  margin-bottom: 0.2em;
+  font-size: 3em;
 }
 .siteFile {
   position: fixed;
@@ -156,6 +170,11 @@ body {
   border: none;
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
+}
+.button:hover {
+  background: #00f;
+  color: #fff;
 }
 .button-close::before {
   content: '\00d7';

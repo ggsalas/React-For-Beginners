@@ -4,6 +4,12 @@ body
   font-size: 18px
   font-family: sans-serif
 
+$black = #000
+$white = #fff
+$colorFront = blue
+$colorActive = red
+$colorBackLight = #eee
+$colorBackDark = #999
 
 //* HOME
 .home 
@@ -41,7 +47,7 @@ body
     margin: 0
     padding: 0
 .SiteFolder-item
-  background: yellow
+  background: $colorBackLight 
   list-style: none
   width: 100px
   padding: 20px
@@ -53,8 +59,15 @@ body
   cursor: pointer
   word-wrap: break-word
   &:hover
-    background: grey
-  
+    background: $colorFront
+.SiteFolder-item-back
+  display: flex
+  flex-direction: column
+  &::before
+    content:"\00ab"
+    margin-bottom: .2em
+    font-size: 3em
+
 // SiteFile
 .siteFile
   position: fixed
@@ -99,11 +112,15 @@ body
 .button
   color: #000
   text-decoration: none
-  background: #eee
+  background: $colorBackLight
   padding: .5em 1em
   border: none
   font-size: 16px
   font-weight: bold
+  cursor: pointer
+  &:hover
+    background: $colorFront
+    color: $white
 
 .button-close
   &::before
