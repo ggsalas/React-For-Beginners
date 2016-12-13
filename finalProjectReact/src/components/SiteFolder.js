@@ -84,7 +84,6 @@ class SiteFolder extends React.Component {
   }
   
   _fileClose = (e) => {
-    e.preventDefault
     this.setState({fileDisplay: false}) 
   }
 }

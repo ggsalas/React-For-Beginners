@@ -1,6 +1,13 @@
 import React from 'react'
 
 class SiteFile extends React.Component {
+  componentDidMount() {
+    document.addEventListener('keydown', this._handleKeyboard );
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyboard);
+  }
+
   render() {
     const imageExt = ['png', 'jpg', 'jpeg', 'tiff', 'gif', 'exif', 'svg', 'bmp', 'webp']
     const videoExt = ['mp4', 'webm', 'ogv', '3gp', 'ogg', 'mp3', 'wave', 'wav', 'aac'] //mpeg not supported?
@@ -21,6 +28,12 @@ class SiteFile extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _handleKeyboard = (e) => {
+    if(e.key == "Escape") { //esc key
+      this.props.fileClose()
+    }
   }
 }
 
