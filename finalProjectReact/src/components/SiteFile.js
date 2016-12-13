@@ -31,7 +31,7 @@ class SiteFile extends React.Component {
   }
 
   _handleKeyboard = (e) => {
-    if(e.key == "Escape") { //esc key
+    if(e.key === "Escape") { //esc key
       this.props.fileClose()
     }
   }

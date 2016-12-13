@@ -107,14 +107,57 @@ $headerHeight = 40px //not work with calc sn different units
   min-height: 100vh
   justify-content: center
 
+$margin-vert = 20px
+$margin-vert-small = 10px
+$margin-horiz = 20px
+$margin-horiz-small = 10px
+
 .AdminSites
   flex: 0 0 300px
-  background-color: blue
+  background-color: $colorBackLight
+.AdminSites-user-menu
+  display: flex
+  justify-content: space-between
+  height: 60px 
+  align-items: center
+  padding: 0 $margin-horiz
+  background: $colorBackDark
+  color: $white
 
-.AdminSiteInfo
+
+.AdminSites-user-title
+  margin-left: $margin-horiz
+.AdminSites-user-sites
+  padding: 0
+  margin: 0 0 $margin-vert $margin-horiz 
+  list-style: none
+  border-top: 2px solid $colorBackDark
+.AdminSites-user-sites-item
+  border-bottom: 2px solid $colorBackDark
+  padding: $margin-vert 0 $margin-vert $margin-horiz 
+  &:hover
+    background: $colorBackDark
+    color: $white
+.AdminSites-user-sites-item-selected
+  background: $white
+  border-left: 10px solid $colorBackDark
+.AdminSites-addWeb.button
+  background: $colorBackDark
+  color: $white
+  margin: $margin-vert $margin-horiz 
+
+.AdminSite-info
   flex: 1
-  max-width: 700px
-  background-color: yellow
+  max-width: 500px
+  background-color: $white
+.AdminSite-info-menu
+  display: flex
+  justify-content: flex-end 
+  height: 60px 
+  align-items: center
+  padding: 0 $margin-horiz
+.AdminSite-info-form
+  margin: $margin-horiz $margin-vert
 
 @media screen and (max-width: 480px)
   .admin

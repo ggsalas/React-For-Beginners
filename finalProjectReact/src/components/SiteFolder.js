@@ -52,7 +52,7 @@ class SiteFolder extends React.Component {
       this._entriesFor( {path} )
       .then(entries => this.setState( {entries, path} ))
     } else if (tag === 'file') {
-      this._file( {path} )
+      this._fileGet( {path} )
       .then( this.setState( {fileDisplay: true, fileName: name}) )
     }
   }
@@ -70,7 +70,7 @@ class SiteFolder extends React.Component {
     .then(data => data.entries)
   }
   
-  _file ({path} = {}) {
+  _fileGet ({path} = {}) {
     return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
       method: 'POST',
       headers: {

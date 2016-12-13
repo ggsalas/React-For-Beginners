@@ -160,14 +160,71 @@ body {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 300px;
           flex: 0 0 300px;
-  background-color: #00f;
+  background-color: #eee;
 }
-.AdminSiteInfo {
+.AdminSites-user-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 60px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+  background: #999;
+  color: #fff;
+}
+.AdminSites-user-title {
+  margin-left: 20px;
+}
+.AdminSites-user-sites {
+  padding: 0;
+  margin: 0 0 20px 20px;
+  list-style: none;
+  border-top: 2px solid #999;
+}
+.AdminSites-user-sites-item {
+  border-bottom: 2px solid #999;
+  padding: 20px 0 20px 20px;
+}
+.AdminSites-user-sites-item:hover {
+  background: #999;
+  color: #fff;
+}
+.AdminSites-user-sites-item-selected {
+  background: #fff;
+  border-left: 10px solid #999;
+}
+.AdminSites-addWeb.button {
+  background: #999;
+  color: #fff;
+  margin: 20px 20px;
+}
+.AdminSite-info {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  max-width: 700px;
-  background-color: #ff0;
+  max-width: 500px;
+  background-color: #fff;
+}
+.AdminSite-info-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 60px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+}
+.AdminSite-info-form {
+  margin: 20px 20px;
 }
 @media screen and (max-width: 480px) {
   .admin {
