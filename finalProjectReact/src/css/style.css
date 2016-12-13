@@ -257,6 +257,10 @@ body {
   padding-top: 14px;
   padding-bottom: 14px;
 }
+.AdminSite-info-form-row .button {
+  background: #999;
+  color: #fff;
+}
 @media screen and (max-width: 480px) {
   .admin {
     -webkit-box-orient: vertical;

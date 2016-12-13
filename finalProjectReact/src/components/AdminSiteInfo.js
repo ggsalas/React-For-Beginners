@@ -16,6 +16,7 @@ class AdminSiteInfo extends React.Component {
           <label className="AdminSite-info-form-item-title">Dropbox Folder</label>
           <div className="AdminSite-info-form-row">
             <input className="AdminSite-info-form-input" name="siteDropboxFolder" placeholder="/src/folder"/>
+            <button className="button" name="siteDropboxFolder" placeholder="/src/folder">Seleccionar</button>
           </div>
         </div>
       </div>
