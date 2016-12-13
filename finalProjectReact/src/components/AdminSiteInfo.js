@@ -8,7 +8,15 @@ class AdminSiteInfo extends React.Component {
           <a href={this.props.siteURL} className="button">Ir al sitio ></a>
         </div>
         <div className="AdminSite-info-form">
-          <button className="button">form</button>
+          <label className="AdminSite-info-form-item-title">Nombre del sitio</label>
+          <div className="AdminSite-info-form-row">
+            <span className="AdminSite-info-form-grey">www.localhost:3000/site/</span>
+            <input className="AdminSite-info-form-input" placeholder="nombre" name="siteName"/>
+          </div>
+          <label className="AdminSite-info-form-item-title">Dropbox Folder</label>
+          <div className="AdminSite-info-form-row">
+            <input className="AdminSite-info-form-input" name="siteDropboxFolder" placeholder="/src/folder"/>
+          </div>
         </div>
       </div>
     )

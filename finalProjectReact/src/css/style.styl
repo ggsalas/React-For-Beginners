@@ -12,6 +12,10 @@ $colorBackLight = #eee
 $colorBackDark = #999
 
 $headerHeight = 40px //not work with calc sn different units
+$margin-vert = 20px
+$margin-vert-small = 10px
+$margin-horiz = 20px
+$margin-horiz-small = 10px
 
 //* HOME
 .home 
@@ -107,10 +111,6 @@ $headerHeight = 40px //not work with calc sn different units
   min-height: 100vh
   justify-content: center
 
-$margin-vert = 20px
-$margin-vert-small = 10px
-$margin-horiz = 20px
-$margin-horiz-small = 10px
 
 .AdminSites
   flex: 0 0 300px
@@ -158,6 +158,29 @@ $margin-horiz-small = 10px
   padding: 0 $margin-horiz
 .AdminSite-info-form
   margin: $margin-horiz $margin-vert
+.AdminSite-info-form-item-title
+  font-size: 22px
+  clear: both
+  display: block
+  margin: $margin-vert 0 $margin-vert-small 0
+.AdminSite-info-form-row
+  display: flex
+  align: center
+.AdminSite-info-form-input
+  flex-grow: 1
+  flex-shrink: 1
+  min-width: 30px
+  font-size: 16px
+  border: 4px solid $colorBackDark
+  padding: $margin-vert-small
+
+.AdminSite-info-form-grey
+  font-weight: bold
+  color: $colorBackDark
+  margin-right: .5em
+  font-size: 16px
+  padding-top: $margin-vert-small + 4px
+  padding-bottom: $margin-vert-small + 4px
 
 @media screen and (max-width: 480px)
   .admin
