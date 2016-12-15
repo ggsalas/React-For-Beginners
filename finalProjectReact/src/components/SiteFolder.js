@@ -22,9 +22,7 @@ class SiteFolder extends React.Component {
     this.state = {
       entries: [],
       path: this.props.initialPath,
-      fileDisplay: false,
-      fileURL: '',
-      fileName: ''
+      fileId: ''
     }
   }
 
@@ -38,22 +36,21 @@ class SiteFolder extends React.Component {
     const backPath = actualPath.split('/').slice(0, -1).join('/')
     return (
       <div className="SiteFolder"> 
-        {this.state.fileDisplay ? <SiteFile fileURL={this.state.fileURL} fileClose={this._fileClose} fileName={this.state.fileName}/> : null }
+        {this.state.fileId !== '' ? <SiteFile fileId={this.state.fileId} entries={this.state.entries} fileClose={this._fileClose} dropboxAccessToken={DROPBOX_ACCESS_TOKEN}  /> : null }
         <ul>
           {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item SiteFolder-item-back">Atrás</li> : ''}
-          {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], path: entry.path_lower, name: entry.name})} className="SiteFolder-item">{entry.name}</li>)}
+          {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], entryId: entry.id, path: entry.path_lower, name: entry.name})} className="SiteFolder-item">{entry.name}</li>)}
         </ul>
       </div>
     )
   }
 
-  _handleEntryClick = ({tag, path, name} = {}) => {
+  _handleEntryClick = ({tag, entryId, path, name} = {}) => {
     if (tag === 'folder'){
       this._entriesFor( {path} )
       .then(entries => this.setState( {entries, path} ))
     } else if (tag === 'file') {
-      this._fileGet( {path} )
-      .then( this.setState( {fileDisplay: true, fileName: name}) )
+      this.setState( {fileId: entryId} )
     }
   }
 
@@ -70,21 +67,8 @@ class SiteFolder extends React.Component {
     .then(data => data.entries)
   }
   
-  _fileGet ({path} = {}) {
-    return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
-      method: 'POST',
-      headers: {
-        'Authorization':'Bearer ' + DROPBOX_ACCESS_TOKEN,
-        'Content-Type':'application/json',
-      },
-      body: JSON.stringify({path})
-    })
-    .then(resp => resp.json())
-    .then(data => this.setState({fileURL: data.link}))
-  }
-  
   _fileClose = (e) => {
-    this.setState({fileDisplay: false}) 
+    this.setState({fileId: ''}) 
   }
 }
 
