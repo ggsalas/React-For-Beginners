@@ -1,29 +1,30 @@
 import React from 'react'
 
 class SiteFile extends React.Component {
-  constructor() {
-    super()
-    this.state = { fileUrl: '' }
+  constructor(props, context) {
+    super(props, context)
+    this.files = this.props.entries.filter((entry) => entry['.tag'] === 'file')
+    this.state = { 
+      fileUrl:  this._fileGetInitial({path: this.props.fileId}), 
+      fileSelected: this.files.find((entry) => entry.id === this.props.fileId),
+    }
   }
   
   componentDidMount() {
     document.addEventListener('keydown', this._handleKeyboard );
-    this._fileGet( {path: this.props.fileId } )
   }
   componentWillUnmount() {
     document.removeEventListener('keydown', this._handleKeyboard);
   }
 
   render() {
-    const files = this.props.entries.filter((entry) => entry['.tag'] === 'file')
-    const fileSelected = files.find((entry) => entry.id === this.props.fileId)
-    const fileSelectedIndex = files.findIndex((entry) => entry.id === this.props.fileId)
-    const fileNext = files[fileSelectedIndex + 1] ? files[fileSelectedIndex + 1] : ''
-    const filePrevious = files[fileSelectedIndex - 1] ? files[fileSelectedIndex - 1] : ''
+    const fileSelectedIndex = this.files.findIndex((entry) => entry.id === this.state.fileSelected.id)
+    const fileNext = this.files[fileSelectedIndex + 1] ? this.files[fileSelectedIndex + 1] : ''
+    const filePrevious = this.files[fileSelectedIndex - 1] ? this.files[fileSelectedIndex - 1] : ''
 
     const imageExt = ['png', 'jpg', 'jpeg', 'tiff', 'gif', 'exif', 'svg', 'bmp', 'webp']
     const videoExt = ['mp4', 'webm', 'ogv', '3gp', 'ogg', 'mp3', 'wave', 'wav', 'aac'] //mpeg not supported?
-    const fileExt = fileSelected.name.split('.').slice(-1)[0].toLowerCase()
+    const fileExt = this.state.fileSelected.name.split('.').slice(-1)[0].toLowerCase()
 
     const iframe = <iframe className="siteFile-iframe" src={`https://docs.google.com/viewer?url=${this.state.fileUrl}&embedded=true`}></iframe>
     const image = <img className="siteFile-image" src={this.state.fileUrl} alt={this.props.fileName}/>
@@ -34,8 +35,8 @@ class SiteFile extends React.Component {
         <div className="siteFile-menu">
           <a href={this.props.fileUrl} className="button button-download">Descargar</a>
           <div>
-            <button className="button" onClick={() => this._fileGet({path: filePrevious.id})}>Anterior</button>
-            <button className="button" onClick={() => this._fileGet({path: fileNext.id})}>Siguiente</button>
+            <button className="button" onClick={() => this._fileGet({path: filePrevious.id, fileSelected: filePrevious})}>Anterior</button>
+            <button className="button" onClick={() => this._fileGet({path: fileNext.id, fileSelected: fileNext})}>Siguiente</button>
           </div>
           <button type="button" onClick={this.props.fileClose} className="button button-close"></button>
         </div>
@@ -52,7 +53,7 @@ class SiteFile extends React.Component {
     }
   }
 
-  _fileGet ({path} = {}) {
+  _fileGet ({path, fileSelected} = {}) {
     return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
       method: 'POST',
       headers: {
@@ -62,7 +63,20 @@ class SiteFile extends React.Component {
       body: JSON.stringify({path})
     })
     .then(resp => resp.json())
-    .then(data => this.setState({fileUrl: data.link}))
+    .then(data => this.setState({fileUrl: data.link, fileSelected}))
+  }
+
+  _fileGetInitial ({path} = {}) {
+    return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
+      method: 'POST',
+      headers: {
+        'Authorization':'Bearer ' + this.props.dropboxAccessToken,
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({path})
+    })
+    .then(resp => resp.json())
+    .then(data =>  data.link)
   }
 }
 
