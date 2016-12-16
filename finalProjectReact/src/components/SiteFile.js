@@ -5,14 +5,19 @@ class SiteFile extends React.Component {
     super(props, context)
     this.files = this.props.entries.filter((entry) => entry['.tag'] === 'file')
     this.state = { 
-      fileUrl:  this._fileGetInitial({path: this.props.fileId}), 
+      fileUrl:  '', 
       fileSelected: this.files.find((entry) => entry.id === this.props.fileId),
     }
   }
-  
+
   componentDidMount() {
     document.addEventListener('keydown', this._handleKeyboard );
+    this._fileGet({
+      path:  this.props.fileId, 
+      fileSelected: this.files.find((entry) => entry.id === this.props.fileId)
+    })
   }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this._handleKeyboard);
   }
@@ -64,19 +69,6 @@ class SiteFile extends React.Component {
     })
     .then(resp => resp.json())
     .then(data => this.setState({fileUrl: data.link, fileSelected}))
-  }
-
-  _fileGetInitial ({path} = {}) {
-    return fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
-      method: 'POST',
-      headers: {
-        'Authorization':'Bearer ' + this.props.dropboxAccessToken,
-        'Content-Type':'application/json',
-      },
-      body: JSON.stringify({path})
-    })
-    .then(resp => resp.json())
-    .then(data =>  data.link)
   }
 }
 
