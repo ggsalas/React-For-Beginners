@@ -4,6 +4,7 @@ class SiteFile extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.files = this.props.entries.filter((entry) => entry['.tag'] === 'file')
+
     this.state = { 
       fileUrl:  '', 
       fileSelected: this.files.find((entry) => entry.id === this.props.fileId),
@@ -53,8 +54,18 @@ class SiteFile extends React.Component {
   }
 
   _handleKeyboard = (e) => {
+    const fileSelectedIndex = this.files.findIndex((entry) => entry.id === this.state.fileSelected.id)
+    const fileNext = this.files[fileSelectedIndex + 1] ? this.files[fileSelectedIndex + 1] : ''
+    const filePrevious = this.files[fileSelectedIndex - 1] ? this.files[fileSelectedIndex - 1] : ''
+
     if(e.key === "Escape") { //esc key
       this.props.fileClose()
+    }
+    if(e.key === "ArrowLeft") { //previus
+      this._fileGet({path: filePrevious.id, fileSelected: filePrevious})
+    }
+    if(e.key === "ArrowRight") { //next
+      this._fileGet({path: fileNext.id, fileSelected: fileNext})
     }
   }
 
