@@ -32,7 +32,7 @@ class SiteFile extends React.Component {
     const videoExt = ['mp4', 'webm', 'ogv', '3gp', 'ogg', 'mp3', 'wave', 'wav', 'aac'] //mpeg not supported?
     const fileExt = this.state.fileSelected.name.split('.').slice(-1)[0].toLowerCase()
 
-    const iframe = <iframe className="siteFile-iframe" src={`https://docs.google.com/viewer?url=${this.state.fileUrl}&embedded=true`}></iframe>
+    const iframe = this.state.fileUrl ? <iframe className="siteFile-iframe" src={`https://docs.google.com/viewer?url=${this.state.fileUrl}&embedded=true`}></iframe> : ''
     const image = <img className="siteFile-image" src={this.state.fileUrl} alt={this.props.fileName}/>
     const video = <video className="siteFile-video" src={this.state.fileUrl} controls autoPlay>Tu navegador no implementa el elemento <code>video</code>. </video>
     
@@ -41,8 +41,8 @@ class SiteFile extends React.Component {
         <div className="siteFile-menu">
           <a href={this.props.fileUrl} className="button button-download">Descargar</a>
           <div>
-            <button className="button" onClick={() => this._fileGet({path: filePrevious.id, fileSelected: filePrevious})}>Anterior</button>
-            <button className="button" onClick={() => this._fileGet({path: fileNext.id, fileSelected: fileNext})}>Siguiente</button>
+          {filePrevious !== '' ? <button className="button" onClick={() => this._fileGet({path: filePrevious.id, fileSelected: filePrevious})}>&#8592; Anterior</button> : ''}
+          {fileNext !== '' ? <button className="button" onClick={() => this._fileGet({path: fileNext.id, fileSelected: fileNext})}>Siguiente &#8594;</button> : ''}
           </div>
           <button type="button" onClick={this.props.fileClose} className="button button-close"></button>
         </div>
