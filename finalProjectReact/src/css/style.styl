@@ -132,6 +132,21 @@ $margin-horiz-small = 10px
   opacity: 0
   top: 60px
 
+.siteFolder-list-enter
+  transition-duration: .2s
+  transition-timing-function: ease-in
+  transform: translateY(100px)
+  opacity: 0
+.siteFolder-list-enter-active
+  transform: translateY(0)
+  opacity: 1
+.siteFolder-list-leave
+  transition-duration: .2s
+  transition-timing-function: ease-out
+.siteFolder-list-leave-active
+  transform: translateY(-100px)
+  opacity: 0
+  
 
 //* ADMIN
 .admin

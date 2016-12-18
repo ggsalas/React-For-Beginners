@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import SiteFile from './SiteFile'
+import CSSTransitionGroup from 'react-addons-css-transition-group'
 
 //draft
 const DROPBOX_ACCESS_TOKEN = 'prnzgrtU38AAAAAAAAAAE-SiM917HjJloZISMGiouOPIkzaHhzShfUz92YhwGx8N'
@@ -37,10 +38,16 @@ class SiteFolder extends React.Component {
     return (
       <div className="SiteFolder"> 
         {this.state.fileId !== '' ? <SiteFile fileId={this.state.fileId} entries={this.state.entries} fileClose={this._fileClose} dropboxAccessToken={DROPBOX_ACCESS_TOKEN}  /> : null }
-        <ul>
-          {actualPath !== this.props.initialPath ? <li onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item SiteFolder-item-back">Atrás</li> : ''}
+        <CSSTransitionGroup
+          component="ul"
+          className="SiteFolder-list"
+          transitionName="siteFolder-list"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={300}
+        >
+          {actualPath !== this.props.initialPath ? <li key="back" onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item SiteFolder-item-back">Atrás</li> : ''}
           {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], entryId: entry.id, path: entry.path_lower, name: entry.name})} className="SiteFolder-item">{entry.name}</li>)}
-        </ul>
+        </CSSTransitionGroup>
       </div>
     )
   }
