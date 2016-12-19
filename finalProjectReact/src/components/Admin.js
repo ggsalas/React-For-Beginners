@@ -1,18 +1,30 @@
 import React from 'react'
 import AdminSites from './AdminSites'
-import AdminSiteInfo from './AdminSiteInfo'
 
 class Admin extends React.Component {
-  static defaultProps = {
-    userName: 'Wenceslao',
-    siteUrl: 'http://localhost:3000/site/catedra1'
+  constructor (props, context) {
+    super(props, context)
+    this.state = {
+      'userIdDropbox': 'prnzgrtU38AAAAAAAAAAE-SiM917HjJloZISMGiouOPIkzaHhzShfUz92YhwGx8N', // Dropbox Access Token
+      'userName': 'Wenceslao',
+      'sites': {}
+    }
+  }
+
+  addSite = (site) => {
+    // update state
+    const sites = {...this.state.sites}
+    const timestamp = Date.now()
+    sites[`site-${timestamp}`] = site 
+
+    // Set state
+    this.setState({sites})
   }
 
   render() {
     return (
       <div className="admin">
-        <AdminSites userName={this.props.userName} /> 
-        <AdminSiteInfo siteURL={this.props.siteUrl}/>
+        <AdminSites userIdDropbox={this.state.userIdDropbox} userName={this.state.userName} sites={this.state.sites} addSite={this.addSite}/> 
       </div>
     )
   }
