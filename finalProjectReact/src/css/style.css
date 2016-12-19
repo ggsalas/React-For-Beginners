@@ -182,6 +182,8 @@ body {
   top: 60px;
 }
 .siteFolder-list-enter {
+  -webkit-transition-delay: 0.35s;
+          transition-delay: 0.35s;
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
   -webkit-transition-timing-function: ease-in;
@@ -190,6 +192,30 @@ body {
           transform: translateY(100px);
   opacity: 0;
 }
+.siteFolder-list-enter:nth-child(1) {
+  -webkit-transition-delay: 0.05s;
+          transition-delay: 0.05s;
+}
+.siteFolder-list-enter:nth-child(2) {
+  -webkit-transition-delay: 0.1s;
+          transition-delay: 0.1s;
+}
+.siteFolder-list-enter:nth-child(3) {
+  -webkit-transition-delay: 0.15s;
+          transition-delay: 0.15s;
+}
+.siteFolder-list-enter:nth-child(4) {
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+}
+.siteFolder-list-enter:nth-child(5) {
+  -webkit-transition-delay: 0.25s;
+          transition-delay: 0.25s;
+}
+.siteFolder-list-enter:nth-child(6) {
+  -webkit-transition-delay: 0.3s;
+          transition-delay: 0.3s;
+}
 .siteFolder-list-enter-active {
   -webkit-transform: translateY(0);
           transform: translateY(0);
@@ -197,8 +223,6 @@ body {
 }
 .siteFolder-list-leave {
   display: none;
-  -webkit-transition-duration: 0.1s;
-          transition-duration: 0.1s;
 }
 .admin {
   display: -webkit-box;

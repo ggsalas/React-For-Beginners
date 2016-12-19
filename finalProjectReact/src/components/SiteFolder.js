@@ -42,8 +42,8 @@ class SiteFolder extends React.Component {
           component="ul"
           className="SiteFolder-list"
           transitionName="siteFolder-list"
-          transitionEnterTimeout={200}
-          transitionLeaveTimeout={100}
+          transitionEnterTimeout={550}
+          transitionLeaveTimeout={550}
         >
           {actualPath !== this.props.initialPath ? <li key="back" onClick={() => this._handleEntryClick({tag: 'folder', path: backPath})} className="SiteFolder-item SiteFolder-item-back">Atrás</li> : ''}
           {this.state.entries.map(entry => <li key={entry.id} onClick={() => this._handleEntryClick({tag: entry['.tag'], entryId: entry.id, path: entry.path_lower, name: entry.name})} className={entry['.tag'] === 'file' ? 'SiteFolder-item SiteFolder-item-file' : 'SiteFolder-item SiteFolder-item-folder'}>{entry.name}</li>)}

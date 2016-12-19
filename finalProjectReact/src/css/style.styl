@@ -139,16 +139,28 @@ $margin-horiz-small = 10px
   top: 60px
 
 .siteFolder-list-enter
+  transition-delay: .35s
   transition-duration: .2s
   transition-timing-function: ease-in
   transform: translateY(100px)
   opacity: 0
+  &:nth-child(1)
+    transition-delay: .05s
+  &:nth-child(2)
+    transition-delay: .1s
+  &:nth-child(3)
+    transition-delay: .15s
+  &:nth-child(4)
+    transition-delay: .2s
+  &:nth-child(5)
+    transition-delay: .25s
+  &:nth-child(6)
+    transition-delay: .3s
 .siteFolder-list-enter-active
   transform: translateY(0)
   opacity: 1
 .siteFolder-list-leave
   display: none
-  transition-duration: .1s
 
   
 
