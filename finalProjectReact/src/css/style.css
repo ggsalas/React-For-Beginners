@@ -196,15 +196,9 @@ body {
   opacity: 1;
 }
 .siteFolder-list-leave {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-out;
-          transition-timing-function: ease-out;
-}
-.siteFolder-list-leave-active {
-  -webkit-transform: translateY(-100px);
-          transform: translateY(-100px);
-  opacity: 0;
+  display: none;
+  -webkit-transition-duration: 0.1s;
+          transition-duration: 0.1s;
 }
 .admin {
   display: -webkit-box;
