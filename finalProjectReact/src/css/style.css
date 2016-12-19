@@ -70,7 +70,6 @@ body {
   padding: 0;
 }
 .SiteFolder-item {
-  background: #eee;
   list-style: none;
   width: 100px;
   padding: 20px;
@@ -85,7 +84,16 @@ body {
 .SiteFolder-item:hover {
   background: #00f;
 }
+.SiteFolder-item-folder {
+  background: #999;
+  color: #fff;
+}
+.SiteFolder-item-file {
+  background: #eee;
+}
 .SiteFolder-item-back {
+  background: #999;
+  color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
